@@ -1,5 +1,6 @@
 class Main {
   public static void main(String[] args) {
-    Review.printSentVal();
+    
+    System.out.println(Review.sentimentVal("hello"));
   }
 }

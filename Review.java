@@ -162,4 +162,23 @@ public class Review {
       return randomNegativeAdj();
     }
   }
+  /** this method returns the sum of the individual sentiment
+  values of the words that make up a review **/
+  public static double totalSentiment(String fileName)
+  {
+    double total = 0.0;
+    int pointer = 0;
+    String review = textToString(fileName);
+    review.substring(0,review.indexOf(""));
+    while (pointer  <= review.length())
+      {
+        // grab a word
+        
+        // get the setiment value
+        // add sentiment value to total
+        // go to next word
+      }
+    pointer++;
+    return total; 
+  }
 }
