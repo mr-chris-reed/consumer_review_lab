@@ -172,8 +172,8 @@ public class Review {
     review.substring(0,review.indexOf(""));
     while (pointer  <= review.length())
       {
+        // Sammy
         // grab a word
-        
         // get the setiment value
         // add sentiment value to total
         // go to next word
