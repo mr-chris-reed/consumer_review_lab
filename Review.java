@@ -168,17 +168,23 @@ public class Review {
   {
     double total = 0.0;
     int pointer = 0;
+    String word = " ";
     String review = textToString(fileName);
-    review.substring(0,review.indexOf(""));
+    review.substring(pointer,review.indexOf(" "));
     while (pointer  <= review.length())
       {
         // Sammy
         // grab a word
+        word = review.substring(pointer,review.indexOf(" "));
         // get the setiment value
         // add sentiment value to total
+        total += sentimentVal(word);
         // go to next word
+        pointer = review.length()+1; 
+        review = review.substring(pointer);
+        System.out.println(review);
       }
-    pointer++;
+    
     return total; 
   }
 }
