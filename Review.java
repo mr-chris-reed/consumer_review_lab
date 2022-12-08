@@ -168,21 +168,48 @@ public class Review {
   {
     double total = 0.0;
     int pointer = 0;
-    String word = " ";
+    int stop = 0;
+    boolean didHavePunctuationEmbedded =false;
+    String word = "";
     String review = textToString(fileName);
-    review.substring(pointer,review.indexOf(" "));
-    while (pointer  <= review.length())
+    while (review.length() > 0)
       {
-        // Sammy
-        // grab a word
-        word = review.substring(pointer,review.indexOf(" "));
-        // get the setiment value
-        // add sentiment value to total
-        total += sentimentVal(word);
-        // go to next word
-        pointer = review.length()+1; 
+        pointer = 0;
+        didHavePunctuationEmbedded = false;
+        // check if at end of review
+        if (review.indexOf(" ") < 0) { // at end of review
+          word = review.substring(pointer);
+          word = removePunctuation(word);
+          total += sentimentVal(word);
+          pointer = word.length() + 1;
+        } else { // temporarily convert to character array to analyze
+          // we are going to use methods calle "isLetter()" and "isDigit()"
+          // these methods are only available on a data type called "char"
+          // arrays are a topic that we will study in the next unit
+          // an array is just a collection of items of the same type
+          // very much like a list in javascript and python but the size
+          // of the array in java is at a fixed length
+          word = review.substring(pointer, review.indexOf(" "));
+          char [] wordChar = word.toCharArray();
+          for (int i = 0; i < wordChar.length-1; i++) {
+            if (!Character.isLetter(wordChar[i]) && !Character.isDigit(wordChar[i])) {
+              stop = i;
+              word = review.substring(0, stop);
+              word = removePunctuation(word);
+              total += sentimentVal(word);
+              pointer = stop + 1;
+              didHavePunctuationEmbedded = true;
+            }
+          }
+          if (!didHavePunctuationEmbedded) {
+            word = removePunctuation(word);
+            total += sentimentVal(word);
+            pointer = word.length()+1; 
+          }
+          
+        }
+        System.out.println(word);
         review = review.substring(pointer);
-        System.out.println(review);
       }
     
     return total; 
